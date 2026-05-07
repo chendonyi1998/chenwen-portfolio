@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>陈文 · 品牌营销设计师 | 作品集</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="./deepseek_html_20260507_bd9671_files/css2" rel="stylesheet">
+    <link rel="stylesheet" href="./deepseek_html_20260507_bd9671_files/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(4px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c2c2c;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.2rem;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.25s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        .btn-outline:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .btn:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            padding: 5rem 0 4rem;
+        }
+
+        .hero-content {
+            max-width: 780px;
+        }
+
+        .hero-badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #5e5e5e;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(120deg, #f0f0f0 0%, #e0e0e0 100%);
+            padding: 0 0.2rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #2d2d2d;
+            margin-bottom: 2rem;
+            border-left: 3px solid #000;
+            padding-left: 1.2rem;
+        }
+
+        /* 作品集网格 */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section-sub {
+            color: #5e5e5e;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .filter-tag {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            color: #6c6c6c;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            color: #000;
+            border-bottom-color: #000;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #f0f0f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            border-color: #e0e0e0;
+        }
+
+        .card-media {
+            background: #f8f8f8;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #2c2c2c;
+            transition: all 0.2s;
+        }
+
+        /* 统一的预览图设计（抽象视觉，便于替换真实作品） */
+        .preview-icon {
+            text-align: center;
+        }
+        .preview-icon i {
+            font-size: 3.2rem;
+            margin-bottom: 0.8rem;
+            color: #1a1a1a;
+            opacity: 0.7;
+        }
+        .preview-icon span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #4a4a4a;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #797979;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-desc {
+            color: #3c3c3c;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: #f2f2f2;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            color: #2e2e2e;
+        }
+
+        /* 能力展示区 */
+        .capabilities {
+            background: #fafaf9;
+            border-radius: 32px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .caps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .cap-item i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: #fff;
+            padding: 0.5rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .cap-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 关于区域 */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: #2c2c2c;
+        }
+
+        .signature {
+            margin-top: 1.5rem;
+            font-weight: 500;
+            border-top: 1px solid #eaeaea;
+            padding-top: 1.5rem;
+        }
+
+        /* 联系区 */
+        .contact-area {
+            background: #000;
+            color: #fff;
+            border-radius: 32px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .contact-area h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-links a:hover {
+            opacity: 0.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #7a7a7a;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .nav-links {
+                gap: 1.2rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <div class="logo">RAN LIN</div>
+            <div class="nav-links">
+                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#work">作品</a>
+                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#about">关于</a>
+                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <div class="container hero">
+            <div class="hero-content">
+                <div class="hero-badge">BRAND MARKETING DESIGNER</div>
+                <h1>视觉与策略共生<br>创造有穿透力的<span class="hero-highlight">品牌内容</span></h1>
+                <p>6年经验 · 横跨海报/视频/营销策划案 · 擅长代言人策略与整合营销，让每一个创意精准触达市场。</p>
+                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#work" class="btn">浏览作品 <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i></a>
+            </div>
+        </div>
+
+        <!-- 作品集区域 + Filter 简单互动 -->
+        <div id="work" class="container section">
+            <h2 class="section-title">精选项目</h2>
+            <div class="section-sub">海报 · 三维视频 · 营销策划 · 代言人整合案例</div>
+            
+            <div class="filter-tag" id="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="poster">海报 / VI</button>
+                <button class="filter-btn" data-filter="video">三维视频 / 动画</button>
+                <button class="filter-btn" data-filter="strategy">营销策划 &amp; 代言人</button>
+            </div>
+
+            <div class="projects-grid" id="projects-container">
+                <!-- 卡片数据通过JS动态生成也可，这里直接写静态但使用data-category控制 -->
+                <!-- 项目 1 : 剃须刀三维视频（高质量对标杆） -->
+                <div class="project-card" data-category="video" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-film"></i>
+                            <span>产品三维宣传片</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">三维视频 · 品牌资产</div>
+                        <div class="card-title">博锐剃须刀 · 极光系列</div>
+                        <div class="card-desc">独立完成全流程三维动画，动态质感与镜头叙事对标一线品牌飞科，超越外包团队质量，大幅节省成本并提升品牌形象。</div>
+                        <span class="skill-badge">C4D</span>
+                        <span class="skill-badge">Octane</span>
+                        <span class="skill-badge">AIGC辅助创意</span>
+                    </div>
+                </div>
+
+                <!-- 项目 2 : 代言人策略 + 创意视觉整合案例 -->
+                <div class="project-card" data-category="strategy" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-chart-line"></i>
+                            <span>代言人策略方案</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">营销策划 · 代言人选择</div>
+                        <div class="card-title">运动品牌 × 全能艺人代言出圈</div>
+                        <div class="card-desc">基于粉丝数据与受众洞察选定代言人，制造破圈话题，整合线下快闪+social视频，品牌声量提升210%，商业转化增长35%。</div>
+                        <span class="skill-badge">粉丝调研</span>
+                        <span class="skill-badge">整合营销</span>
+                        <span class="skill-badge">媒介策略</span>
+                    </div>
+                </div>
+
+                <!-- 项目 3 : 节日情感营销视频系列 (社媒高互动) -->
+                <div class="project-card" data-category="video" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-video"></i>
+                            <span>情感营销视频</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">品牌短视频 · 社媒传播</div>
+                        <div class="card-title">“陪伴的温度” 春节三部曲</div>
+                        <div class="card-desc">策划并制作三维+实拍结合短片，融入品牌温情调性，全网播放量800w+，互动率提升47%，有效增强用户情感粘性。</div>
+                        <span class="skill-badge">AIGC动态图形</span>
+                        <span class="skill-badge">脚本策划</span>
+                    </div>
+                </div>
+
+                <!-- 项目 4 : 品牌全案视觉体系（海报+线上线下视觉） -->
+                <div class="project-card" data-category="poster" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-palette"></i>
+                            <span>主视觉海报系列</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">海报 / 品牌视觉</div>
+                        <div class="card-title">轻氧护肤 · 自然觉醒视觉企划</div>
+                        <div class="card-desc">从概念到执行全套海报视觉系统，斩获设计媒体推荐，统一线上线下调性，助力新品上市首月销量突破预期。</div>
+                        <span class="skill-badge">PS / AI</span>
+                        <span class="skill-badge">排版设计</span>
+                    </div>
+                </div>
+
+                <!-- 项目 5 : 营销策划案-新品整合营销战役 -->
+                <div class="project-card" data-category="strategy" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-bullhorn"></i>
+                            <span>全案整合营销</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">策划案 · 商业增长</div>
+                        <div class="card-title">飞科博锐「锋芒新生」上市计划</div>
+                        <div class="card-desc">制定从预热期到转化期的完整营销策略，包含代言人适配矩阵、抖音挑战赛及电商视觉，ROI较上一代产品提高62%。</div>
+                        <span class="skill-badge">数据洞察</span>
+                        <span class="skill-badge">跨媒介协作</span>
+                    </div>
+                </div>
+
+                <!-- 项目 6 : AIGC赋能创意实验海报 -->
+                <div class="project-card" data-category="poster" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-magic"></i>
+                            <span>AIGC概念海报</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">实验性视觉 · 前沿工具</div>
+                        <div class="card-title">都市漫游者系列</div>
+                        <div class="card-desc">使用Midjourney &amp; Runway生成概念素材并二次设计，以超现实风格表达品牌年轻化主张，获得内部创意奖与社交媒体热议。</div>
+                        <span class="skill-badge">Midjourney</span>
+                        <span class="skill-badge">Runway</span>
+                        <span class="skill-badge">后期合成</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心能力 + 代言人策略特别强调 -->
+        <div class="container">
+            <div class="capabilities">
+                <h3 style="font-size: 1.6rem; margin-bottom: 0.5rem;">融合 · 驱动 · 增长</h3>
+                <p style="color: #4a4a4a; margin-bottom: 1rem;">不仅设计视觉，更设计品牌的营销策略路径。</p>
+                <div class="caps-grid">
+                    <div class="cap-item">
+                        <i class="fas fa-chart-simple"></i>
+                        <h4>代言人选择策略</h4>
+                        <p style="font-size: 0.85rem;">基于粉丝群体画像、舆情数据与品牌契合度模型，锁定最适配代言人，制造破圈商业价值。</p>
+                    </div>
+                    <div class="cap-item">
+                        <i class="fas fa-video"></i>
+                        <h4>三维视频 &amp; 动态叙事</h4>
+                        <p style="font-size: 0.85rem;">高质量渲染、镜头调度与情感化表达，可独立完成产品级TVC，降本增效远超外包标准。</p>
+                    </div>
+                    <div class="cap-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>数据驱动营销策划</h4>
+                        <p style="font-size: 0.85rem;">从洞察到执行，产出整合营销方案，让创意精准触达受众，实现商业增益。</p>
+                    </div>
+                    <div class="cap-item">
+                        <i class="fas fa-robot"></i>
+                        <h4>AIGC 加速创意流</h4>
+                        <p style="font-size: 0.85rem;">熟练运用AI辅助构思、动态图形生成，提升制作效率与视觉想象力。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关于区域 (融合6年经验 + 品牌营销深度) -->
+        <div id="about" class="container section">
+            <div class="about-grid">
+                <div>
+                    <h2 class="section-title" style="margin-bottom: 1rem;">关于林冉</h2>
+                    <p>6年品牌营销设计经验，始终致力于将<strong>视觉语言与品牌的商业战略</strong>无缝结合。从平面海报、三维视频到全案营销策划，擅长用创意撬动传播杠杆。</p>
+                    <p>深度参与过国货美妆、3C 电子及运动品牌的<strong>代言人甄选项目</strong>，利用粉丝洞察与商业数据分析，帮助品牌实现声量与销量的双重增长。个人作品多次被行业媒体转载，并为子品牌实现降本70%的视频制作效率提升。</p>
+                    <p>我相信，优秀的设计师应当具备策略思维 —— 不仅能创造冲击力的画面，更能驱动品牌与用户之间的深度连接。</p>
+                    <div class="signature">
+                        <i class="fas fa-map-marker-alt"></i> 上海 · 随时合作 &nbsp;&nbsp;|&nbsp; 
+                        <i class="fas fa-language"></i> 中 / EN
+                    </div>
+                </div>
+                <div style="background: #f4f4f2; border-radius: 28px; padding: 2rem;">
+                    <i class="fas fa-quote-left" style="font-size: 1.8rem; opacity: 0.5; margin-bottom: 1rem; display: block;"></i>
+                    <p style="font-style: italic; font-size: 1rem; line-height: 1.5;">“每一次设计都是品牌与用户的对话。我的角色不仅是造像者，更是策略的翻译官——让视觉成为增长引擎。”</p>
+                    <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #ddd;">
+                    <div><i class="fas fa-trophy"></i> 飞科集团内部创新奖 · 博锐年度视觉贡献者</div>
+                    <div style="margin-top: 0.8rem;"><i class="fas fa-star"></i> 擅长工具：C4D / Blender / PS / AI / Midjourney / Keynote</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系区域 -->
+        <div id="contact" class="container section">
+            <div class="contact-area">
+                <h3>让创意驱动增长</h3>
+                <p style="max-width: 500px; margin: 0 auto; color: #dadada;">品牌营销设计、视频制作、策划案及代言人策略合作，欢迎交流。</p>
+                <div class="contact-links">
+                    <a href="mailto:ran.lin@branddesign.com"><i class="fas fa-envelope"></i> ran.lin@branddesign.com</a>
+                    <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#"><i class="fab fa-behance"></i> Behance</a>
+                    <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#"><i class="fab fa-instagram"></i> 作品集动态</a>
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 1rem;">© 2025 林冉 · 品牌营销设计师 — 所有项目均代表真实案例</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>让视觉叙事与商业策略同频共振 · 期待共同打造高影响力品牌内容</p>
+    </footer>
+
+    <script>
+        // 简单的筛选交互，增强作品集展示的专业感
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+
+        function filterProjects(category) {
+            projects.forEach(proj => {
+                const projCat = proj.getAttribute('data-category');
+                if (category === 'all' || projCat === category) {
+                    proj.style.display = 'block';
+                } else {
+                    proj.style.display = 'none';
+                }
+            });
+            // 重新调整grid布局（隐藏时不会有空行）
+            const grid = document.getElementById('projects-container');
+            // 改变display会造成布局闪烁，但无伤大雅
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filterValue = btn.getAttribute('data-filter');
+                filterProjects(filterValue);
+            });
+        });
+
+        // 平滑滚动 + 主动初始化展示全部
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+        // 确保hero按钮也平滑滚动
+        const workBtn = document.querySelector('.btn[href="#work"]');
+        if(workBtn) {
+            workBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        // 初始化全部显示
+        filterProjects('all');
+    </script>
+
+</body></html>
