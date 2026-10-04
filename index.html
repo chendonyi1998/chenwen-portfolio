@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<!-- saved from url=(0069)file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html -->
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>陈文 · 品牌营销设计师 | 作品集</title>
     <!-- Google Fonts & Font Awesome -->
-    <link href="./deepseek_html_20260507_bd9671_files/css2" rel="stylesheet">
-    <link rel="stylesheet" href="./deepseek_html_20260507_bd9671_files/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -386,6 +387,52 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* 卡片内的视频与图片 */
+        .card-content iframe {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            border-radius: 16px;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .card-media-img {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .card-media-img img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-link {
+            margin-top: 1rem;
+        }
+
+        .card-link a {
+            color: #1a1a1a;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-bottom: 1px solid #d0d0d0;
+            padding-bottom: 2px;
+            transition: border-color 0.2s;
+        }
+
+        .card-link a:hover {
+            border-color: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .card-content iframe,
+            .card-media-img img {
+                height: 190px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -393,9 +440,9 @@
         <div class="container nav-inner">
             <div class="logo">CHEN WEN</div>
             <div class="nav-links">
-                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#work">作品</a>
-                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#about">关于</a>
-                <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#contact">联系</a>
+                <a href="#work">作品</a>
+                <a href="#about">关于</a>
+                <a href="#contact">联系</a>
             </div>
         </div>
     </nav>
@@ -407,6 +454,9 @@
                 <div class="hero-badge">BRAND MARKETING DESIGNER</div>
                 <h1>视觉与策略共生<br>创造有穿透力的<span class="hero-highlight">品牌内容</span></h1>
                 <p>三维渲染、动画与AIGC制作能力，兼具品牌全案与转化视角，独立完成视频全链路。具备脚本策划与供应商管理经验，统筹产品、明星、种草等视频类目，让内容兼具审美、策略与转化力。</p>
+                <a href="#work" class="btn">浏览作品 <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i></a>
+            </div>
+        </div>
 
         <!-- 作品集区域 + Filter 简单互动 -->
         <div id="work" class="container section">
@@ -430,7 +480,7 @@
                             <span>产品营销视频</span>
                         </div>
                     </div>
-                    <div class="card-content"><iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115171963969309&bvid=BV1QqYAz8ERn&cid=32306695825&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="card-content"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115171963969309&bvid=BV1QqYAz8ERn&cid=32306695825&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                         <div class="card-title">博锐P20剃须刀</div>
                         <div class="card-desc">制作产品一镜到底卖点展示视频，以流畅镜头撬动产品叙事，镜头质量比肩一线品牌。</div>
                         <span class="skill-badge">CGI制作</span>
@@ -445,20 +495,15 @@
                             <span>节日营销视频</span>
                         </div>
                     </div>
-                    <div class="card-content"><iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114701765711123&bvid=BV114NLzmERz&cid=30555704262&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="card-content"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114701765711123&bvid=BV114NLzmERz&cid=30555704262&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                         <div class="card-title">博锐520情人节</div>
                         <div class="card-desc">你出现时，心动就有了定义。因爱同频，共享你我的同频心跳。这个 520，博锐化身告白助攻。让爱同频，心动0距离 🩵 🩵</div>
                         <span class="skill-badge">CGI制作</span>
-<div class="card-content">
-    <!-- 原有的标题、描述、标签等... -->
-    
-    <!-- 新增的超链接 -->
-    <p style="margin-top: 1rem;">
-        <a href="https://my.feishu.cn/slides/WWigsghEYld9qEdlTL4cwQclnkg?from=from_copylink">
+                        <p class="card-link">
+                            <a target="_blank" rel="noopener noreferrer" href="https://my.feishu.cn/slides/WWigsghEYld9qEdlTL4cwQclnkg?from=from_copylink">
             🔗 查看飞书完整策划文档
         </a>
-    </p>
-</div>
+                        </p>
                     </div>
                 </div>
               
@@ -488,42 +533,35 @@
                             <span>产品营销视频</span>
                         </div>
                     </div>
-                    <div class="card-content"><iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115501887922084&bvid=BV1rB2FBJEMT&cid=33753533840&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="card-content"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115501887922084&bvid=BV1rB2FBJEMT&cid=33753533840&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                         <div class="card-title">博锐太空胶囊 P0剃须刀</div>
                         <div class="card-desc">策划并制作三维营销视频，打造“宇宙级净剃”品类技术符号，树立新锐科技形象，强化“迷你机身、旗舰性能”卖点，赋能电商与线下销售</div>
                         <span class="skill-badge">CGI制作</span>
                         <span class="skill-badge">脚本策划</span>
-<div class="card-content">
-    <!-- 原有的标题、描述、标签等... -->
-    
-    <!-- 新增的超链接 -->
-    <p style="margin-top: 1rem;">
-        <a href="https://my.feishu.cn/slides/QOdns0ub8l1ED1dirsoc13D7nyf?from=from_copylink" target="_blank" rel="noopener noreferrer">
+                        <p class="card-link">
+                            <a target="_blank" rel="noopener noreferrer" href="https://my.feishu.cn/slides/QOdns0ub8l1ED1dirsoc13D7nyf?from=from_copylink">
             🔗 查看飞书完整策划文档
         </a>
-    </p>
-</div>
+                        </p>
                     </div>
                 </div>
 
-                <!-- 项目 4 : 品牌全案视觉体系（海报+线上线下视觉） -->
+                <!-- 项目 5 : 品牌全案视觉体系（海报+线上线下视觉） -->
                 <div class="project-card" data-category="poster" style="display: block;">
-                    <div class="card-media">
-                        <div class="preview-icon">
-                            <i class="fas fa-palette"></i>
-                            <span>主视觉海报系列</span>
-                        </div>
+                    <div class="card-media card-media-img">
+                        <img src="chengfenqiu.png" alt="化妆品成分球 视觉作品">
                     </div>
                     <div class="card-content">
                         <div class="card-category">元素 / 品牌视觉</div>
                         <div class="card-title">化妆品成分球</div>
-                        <div class="card-media" style="padding: 0; overflow: hidden;">
-    <img src="https://raw.githubusercontent.com/chendonyi1998/melodic-melomakarona-1deac4/imagine/chengfenqiu.png" alt="chengfenqiu 作品" style="width: 100%; height: 100%; object-fit: cover;">
-</div>
+                        <div class="card-desc">以三维质感的成分球体作为核心视觉元素，强化产品的科技感与成分可视化表达，用于新品视觉主画面与社媒传播。</div>
+                        <span class="skill-badge">C4D</span>
+                        <span class="skill-badge">Octane</span>
+                        <span class="skill-badge">后期合成</span>
                     </div>
                 </div>
 
-                <!-- 项目 5 : 营销策划案-新品整合营销战役 -->
+                <!-- 项目 6 : 营销策划案-新品整合营销战役 -->
                 <div class="project-card" data-category="strategy" style="display: block;">
                     <div class="card-media">
                         <div class="preview-icon">
@@ -540,7 +578,7 @@
                     </div>
                 </div>
 
-                <!-- 项目 6 : AIGC赋能创意实验海报 -->
+                <!-- 项目 7 : AIGC赋能创意实验海报 -->
                 <div class="project-card" data-category="poster" style="display: block;">
                     <div class="card-media">
                         <div class="preview-icon">
@@ -620,9 +658,9 @@
                 <p style="max-width: 500px; margin: 0 auto; color: #dadada;">品牌营销设计、视频制作、策划案及代言人策略合作，欢迎交流。</p>
                 <div class="contact-links">
                     <a href="mailto:360402962@qq.com"><i class="fas fa-envelope"></i> 360402962@qq.com</a>
-                    <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#"><i class="fab fa-behance"></i> Behance</a>
-                    <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                    <a href="file:///C:/Users/donyiya/Downloads/deepseek_html_20260507_bd9671.html#"><i class="fab fa-instagram"></i> 作品集动态</a>
+                    <a href="#"><i class="fab fa-behance"></i> Behance</a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="#"><i class="fab fa-instagram"></i> 作品集动态</a>
                 </div>
                 <p style="font-size: 0.8rem; margin-top: 1rem;">© 2026 陈文 · 品牌营销设计师 — 所有项目均代表真实案例</p>
             </div>
@@ -688,3 +726,4 @@
     </script>
 
 </body></html>
+
