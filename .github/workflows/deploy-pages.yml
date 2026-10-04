@@ -29,6 +29,9 @@ jobs:
         with:
           enablement: true
 
+      - name: Ensure no Jekyll processing
+        run: touch .nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
