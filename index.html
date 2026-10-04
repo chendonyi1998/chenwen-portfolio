@@ -404,9 +404,31 @@
 
         .card-media-img img {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
             display: block;
+        }
+
+        .project-card-wide {
+            grid-column: 1 / -1;
+        }
+
+        .zoom-trigger {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: zoom-in;
+            line-height: 0;
+        }
+
+        .zoom-trigger img {
+            transition: transform 0.35s ease;
+        }
+
+        .zoom-trigger:hover img {
+            transform: scale(1.012);
         }
 
         .card-link {
@@ -428,10 +450,85 @@
         }
 
         @media (max-width: 768px) {
-            .card-content iframe,
-            .card-media-img img {
+            .card-content iframe {
                 height: 190px;
             }
+        }
+
+        /* 图片放大查看 */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(10, 10, 10, 0.94);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lightbox[hidden] {
+            display: none;
+        }
+
+        .lightbox-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.9rem 1.2rem;
+            color: #eaeaea;
+            flex-wrap: wrap;
+        }
+
+        .lightbox-hint {
+            font-size: 0.82rem;
+            opacity: 0.75;
+        }
+
+        .lightbox-tools {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lightbox-tools button {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border: 0;
+            border-radius: 10px;
+            height: 2.4rem;
+            min-width: 2.4rem;
+            padding: 0 0.8rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lightbox-tools button:hover {
+            background: rgba(255, 255, 255, 0.24);
+        }
+
+        .lightbox-stage {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: none;
+            cursor: grab;
+        }
+
+        .lightbox-stage.is-dragging {
+            cursor: grabbing;
+        }
+
+        .lightbox-stage img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+            transform-origin: center center;
+            will-change: transform;
         }
     </style>
 </head>
@@ -465,7 +562,7 @@
             
             <div class="filter-tag" id="filter-buttons">
                 <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="poster">海报 / VI</button>
+                <button class="filter-btn" data-filter="poster">平面</button>
                 <button class="filter-btn" data-filter="video">三维视频 / 动画</button>
                 <button class="filter-btn" data-filter="strategy">营销策划 &amp; 代言人</button>
             </div>
@@ -547,17 +644,11 @@
                 </div>
 
                 <!-- 项目 5 : 品牌全案视觉体系（海报+线上线下视觉） -->
-                <div class="project-card" data-category="poster" style="display: block;">
+                <div class="project-card project-card-wide" data-category="poster" style="display: block;">
                     <div class="card-media card-media-img">
-                        <img src="chengfenqiu.png" alt="化妆品成分球 视觉作品">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-category">元素 / 品牌视觉</div>
-                        <div class="card-title">化妆品成分球</div>
-                        <div class="card-desc">以三维质感的成分球体作为核心视觉元素，强化产品的科技感与成分可视化表达，用于新品视觉主画面与社媒传播。</div>
-                        <span class="skill-badge">C4D</span>
-                        <span class="skill-badge">Octane</span>
-                        <span class="skill-badge">后期合成</span>
+                        <button type="button" class="zoom-trigger" aria-label="点击放大查看：化妆品成分球">
+                            <img src="chengfenqiu.png" alt="化妆品成分球 视觉作品">
+                        </button>
                     </div>
                 </div>
 
@@ -721,6 +812,182 @@
         }
         // 初始化全部显示
         filterProjects('all');
+
+        /* 图片放大查看：滚轮 / 按钮缩放，拖动平移，Esc 关闭 */
+        document.addEventListener('DOMContentLoaded', function () {
+            const box = document.getElementById('lightbox');
+            const stage = document.getElementById('lightbox-stage');
+            const zoomImg = document.getElementById('lightbox-img');
+            if (!box || !stage || !zoomImg) return;
+
+            const MAX_SCALE = 8;
+            let scale = 1, tx = 0, ty = 0;
+            let dragging = false, moved = false;
+            let startX = 0, startY = 0, baseX = 0, baseY = 0;
+            let pinchDist = 0, pinchScale = 1;
+            const pointers = {};
+
+            function apply() {
+                zoomImg.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(' + scale + ')';
+            }
+
+            function clampPan() {
+                const r = stage.getBoundingClientRect();
+                const maxX = Math.max(0, (zoomImg.offsetWidth * scale - r.width) / 2);
+                const maxY = Math.max(0, (zoomImg.offsetHeight * scale - r.height) / 2);
+                tx = Math.max(-maxX, Math.min(maxX, tx));
+                ty = Math.max(-maxY, Math.min(maxY, ty));
+            }
+
+            function resetView() {
+                scale = 1; tx = 0; ty = 0;
+                apply();
+            }
+
+            function zoomAt(factor, clientX, clientY) {
+                const next = Math.max(1, Math.min(MAX_SCALE, scale * factor));
+                if (Math.abs(next - scale) < 0.0001) return;
+                const r = stage.getBoundingClientRect();
+                const px = clientX - r.left - r.width / 2;
+                const py = clientY - r.top - r.height / 2;
+                const k = next / scale;
+                tx = px - (px - tx) * k;
+                ty = py - (py - ty) * k;
+                scale = next;
+                if (scale <= 1.0001) { scale = 1; tx = 0; ty = 0; }
+                clampPan();
+                apply();
+            }
+
+            function openBox(src, alt) {
+                zoomImg.src = src;
+                zoomImg.alt = alt || '';
+                box.hidden = false;
+                document.body.style.overflow = 'hidden';
+                moved = false;
+                resetView();
+            }
+
+            function closeBox() {
+                box.hidden = true;
+                document.body.style.overflow = '';
+                dragging = false;
+                stage.classList.remove('is-dragging');
+                Object.keys(pointers).forEach(function (id) { delete pointers[id]; });
+            }
+
+            document.querySelectorAll('.zoom-trigger').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const im = btn.querySelector('img');
+                    if (im) openBox(im.getAttribute('src'), im.getAttribute('alt'));
+                });
+            });
+
+            box.addEventListener('click', function (e) {
+                const act = e.target.closest('[data-action]');
+                if (act) {
+                    const a = act.getAttribute('data-action');
+                    if (a === 'close') {
+                        closeBox();
+                    } else if (a === 'reset') {
+                        resetView();
+                    } else {
+                        const r = stage.getBoundingClientRect();
+                        zoomAt(a === 'zoom-in' ? 1.5 : 1 / 1.5, r.left + r.width / 2, r.top + r.height / 2);
+                    }
+                    return;
+                }
+                if (moved) { moved = false; return; }
+                if (e.target === stage) closeBox();
+            });
+
+            stage.addEventListener('wheel', function (e) {
+                e.preventDefault();
+                zoomAt(Math.exp(-e.deltaY * 0.0015), e.clientX, e.clientY);
+            }, { passive: false });
+
+            stage.addEventListener('pointerdown', function (e) {
+                pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+                if (stage.setPointerCapture) stage.setPointerCapture(e.pointerId);
+                const ids = Object.keys(pointers);
+                if (ids.length === 1) {
+                    dragging = true; moved = false;
+                    startX = e.clientX; startY = e.clientY;
+                    baseX = tx; baseY = ty;
+                    stage.classList.add('is-dragging');
+                } else if (ids.length === 2) {
+                    const a = pointers[ids[0]], b = pointers[ids[1]];
+                    pinchDist = Math.hypot(a.x - b.x, a.y - b.y);
+                    pinchScale = scale;
+                    dragging = false;
+                    stage.classList.remove('is-dragging');
+                }
+            });
+
+            stage.addEventListener('pointermove', function (e) {
+                if (!pointers[e.pointerId]) return;
+                pointers[e.pointerId].x = e.clientX;
+                pointers[e.pointerId].y = e.clientY;
+                const ids = Object.keys(pointers);
+
+                if (ids.length === 2 && pinchDist > 0) {
+                    const a = pointers[ids[0]], b = pointers[ids[1]];
+                    const d = Math.hypot(a.x - b.x, a.y - b.y);
+                    const midX = (a.x + b.x) / 2, midY = (a.y + b.y) / 2;
+                    const target = Math.max(1, Math.min(MAX_SCALE, pinchScale * (d / pinchDist)));
+                    const r = stage.getBoundingClientRect();
+                    const px = midX - r.left - r.width / 2;
+                    const py = midY - r.top - r.height / 2;
+                    const k = target / scale;
+                    tx = px - (px - tx) * k;
+                    ty = py - (py - ty) * k;
+                    scale = target;
+                    moved = true;
+                    clampPan();
+                    apply();
+                    return;
+                }
+
+                if (!dragging) return;
+                const dx = e.clientX - startX, dy = e.clientY - startY;
+                if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
+                tx = baseX + dx; ty = baseY + dy;
+                clampPan();
+                apply();
+            });
+
+            function endPointer(e) {
+                if (!pointers[e.pointerId]) return;
+                delete pointers[e.pointerId];
+                if (Object.keys(pointers).length < 2) pinchDist = 0;
+                if (Object.keys(pointers).length === 0) {
+                    dragging = false;
+                    stage.classList.remove('is-dragging');
+                }
+            }
+            stage.addEventListener('pointerup', endPointer);
+            stage.addEventListener('pointercancel', endPointer);
+
+            document.addEventListener('keydown', function (e) {
+                if (box.hidden) return;
+                if (e.key === 'Escape' || e.keyCode === 27) closeBox();
+            });
+        });
     </script>
 
++    <!-- 图片放大查看 -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片放大查看" hidden>
+        <div class="lightbox-bar">
+            <span class="lightbox-hint">滚轮或按钮缩放 · 拖动图片平移 · 点击空白处或 Esc 关闭</span>
+            <div class="lightbox-tools">
+                <button type="button" data-action="zoom-out" aria-label="缩小">−</button>
+                <button type="button" data-action="reset" aria-label="恢复原始大小">重置</button>
+                <button type="button" data-action="zoom-in" aria-label="放大">＋</button>
+                <button type="button" data-action="close" aria-label="关闭">✕</button>
+            </div>
+        </div>
+        <div class="lightbox-stage" id="lightbox-stage">
+            <img id="lightbox-img" alt="">
+        </div>
+    </div>
 </body></html>
