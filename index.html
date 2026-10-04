@@ -397,6 +397,16 @@
             margin-bottom: 1rem;
         }
 
+        .card-content video {
+            width: 100%;
+            height: 220px;
+            border-radius: 16px;
+            display: block;
+            margin-bottom: 1rem;
+            background: #000;
+            object-fit: contain;
+        }
+
         .card-media-img {
             padding: 0;
             overflow: hidden;
@@ -450,7 +460,8 @@
         }
 
         @media (max-width: 768px) {
-            .card-content iframe {
+            .card-content iframe,
+            .card-content video {
                 height: 190px;
             }
         }
@@ -695,6 +706,25 @@
                         <span class="skill-badge">后期合成</span>
                     </div>
                 </div>
+
+                <!-- 项目 9 : 产品视觉短片（视频托管在 GitHub Releases） -->
+                <div class="project-card" data-category="video" style="display: block;">
+                    <div class="card-media">
+                        <div class="preview-icon">
+                            <i class="fas fa-film"></i>
+                            <span>产品视频</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P001.mp4" controls playsinline preload="metadata"></video>
+                        <div class="card-category">三维视频 · 2K</div>
+                        <div class="card-title">产品视觉短片</div>
+                        <div class="card-desc">2560×1440，44 秒。视频托管在 GitHub Releases，页面内直接播放，不跳转第三方平台。</div>
+                        <span class="skill-badge">2K</span>
+                        <span class="skill-badge">CGI制作</span>
+                    </div>
+                </div>
+
             </div>
         </div>
 
