@@ -849,17 +849,7 @@
                 </div>
 
                 <!-- AIGC 视频：父亲节 -->
-                <div class="project-card" data-category="aigc" style="display: block;">
-                    <div class="card-content">
-                        <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/fuqinjie.mp4" aria-label="点击播放高清视频：父亲节视频">
-                            <video data-src="previews/preview-fuqinjie.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-fuqinjie.mp4" poster="posters/preview-fuqinjie.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
-                            <span class="video-hint">高清</span>
-                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
-                        </button>
-                        <div class="card-title">父亲节视频</div>
-                        <div class="card-desc">穿过岁月的云海，总有一束光，为我照亮前行的路。<br>从前你是我的靠山，未来换我守护你</div>
-                    </div>
-                </div>
+                
 
                 <!-- 视频：GEMO金茉胶原美容仪 -->
                 <div class="project-card" data-category="marketing" data-order="2" style="display: block;">
@@ -1255,8 +1245,15 @@
             function endPointer(e) {
                 if (!pointers[e.pointerId]) return;
                 delete pointers[e.pointerId];
-                if (Object.keys(pointers).length < 2) pinchDist = 0;
-                if (Object.keys(pointers).length === 0) {
+                const remaining = Object.keys(pointers);
+                if (remaining.length < 2) pinchDist = 0;
+                if (remaining.length === 1) {
+                    const pointer = pointers[remaining[0]];
+                    startX = pointer.x; startY = pointer.y;
+                    baseX = tx; baseY = ty;
+                    dragging = true;
+                    stage.classList.add('is-dragging');
+                } else if (remaining.length === 0) {
                     dragging = false;
                     stage.classList.remove('is-dragging');
                 }
@@ -1278,6 +1275,19 @@
             const stage = document.getElementById('video-stage');
             const hd = document.getElementById('lightbox-video');
             if (!box || !hd) return;
+            const hdStatus = document.getElementById('video-load-status');
+            const hdRetry = document.getElementById('retry-hd-video');
+            hd.addEventListener('loadstart', function () {
+                if (!box.hidden) { hdStatus.textContent = '视频加载中…'; hdRetry.hidden = true; }
+            });
+            hd.addEventListener('waiting', function () {
+                if (!box.hidden) hdStatus.textContent = '视频缓冲中…';
+            });
+            hd.addEventListener('playing', function () { hdStatus.textContent = ''; hdRetry.hidden = true; });
+            hd.addEventListener('error', function () {
+                if (!box.hidden) { hdStatus.textContent = '视频暂时无法加载，请重试'; hdRetry.hidden = false; }
+            });
+            hdRetry.addEventListener('click', function () { openHD(hd.getAttribute('src')); });
             const visible = new Set();
 
             function modalOpen() {
@@ -1303,6 +1313,7 @@
                 function show(message) { status.textContent = message; status.hidden = !message; }
                 v.addEventListener('loadstart', function () { show('预览加载中…'); });
                 v.addEventListener('waiting', function () { show('预览缓冲中…'); });
+                v.addEventListener('loadeddata', function () { if (retry.hidden) show(''); });
                 v.addEventListener('playing', function () {
                     ui.playing = true; ui.pending = false; show(''); retry.hidden = true;
                 });
@@ -1323,6 +1334,7 @@
             }
             function play(v, userGesture = false) {
                 const ui = previewUI.get(v);
+                if (ui && !v.paused && v.readyState >= 3) return;
                 if (ui && ui.pending && !userGesture) return;
                 if (ui) {
                     ui.pending = true;
@@ -1333,7 +1345,10 @@
                 }
                 const promise = v.play();
                 if (promise && promise.catch) promise.catch(function (err) {
-                    if (!ui) return;
+                    if (!ui) {
+                        if (!box.hidden && !hd.error) hdStatus.textContent = '请点击视频中的播放按钮';
+                        return;
+                    }
                     ui.pending = false;
                     if (err.name === 'AbortError') return;
                     ui.status.textContent = err.name === 'NotAllowedError' ? '点击下方播放预览' : '预览暂时无法播放，可点击查看高清';
@@ -1357,6 +1372,8 @@
             }
             function openHD(src) {
                 previews.forEach(function (v) { pause(v); });
+                hdStatus.textContent = '视频加载中…';
+                hdRetry.hidden = true;
                 hd.src = src;
                 box.hidden = false;
                 document.body.style.overflow = 'hidden';
@@ -1367,6 +1384,8 @@
                 box.hidden = true;
                 document.body.style.overflow = '';
                 hd.pause();
+                hdStatus.textContent = '';
+                hdRetry.hidden = true;
                 hd.removeAttribute('src');
                 hd.load();
                 sync();
@@ -1429,7 +1448,7 @@
             const dialogs = document.querySelectorAll('#lightbox, #video-lightbox');
             const previousFocus = new WeakMap();
             function focusables(dialog) {
-                return [...dialog.querySelectorAll('button, a[href], video[controls], [tabindex="0"]')].filter(el => !el.disabled);
+                return [...dialog.querySelectorAll('button, a[href], video[controls], [tabindex="0"]')].filter(el => !el.disabled && !el.hidden && el.getClientRects().length > 0);
             }
             dialogs.forEach(function (dialog) {
                 const observer = new MutationObserver(function () {
@@ -1474,8 +1493,9 @@
     <!-- 视频放大播放 -->
     <div class="video-lightbox" id="video-lightbox" role="dialog" aria-modal="true" aria-label="视频播放" hidden>
         <div class="lightbox-bar">
-            <span class="lightbox-hint">点击播放 · 点击空白处或 Esc 关闭</span>
+            <span class="lightbox-hint">点击播放 · 点击空白处或 Esc 关闭 <span id="video-load-status" role="status" aria-live="polite"></span></span>
             <div class="lightbox-tools">
+                <button type="button" id="retry-hd-video" hidden>重试播放</button>
                 <button type="button" data-action="close" aria-label="关闭">✕</button>
             </div>
         </div>
