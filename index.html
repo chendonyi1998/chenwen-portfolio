@@ -632,6 +632,14 @@
             .projects-grid.is-poster .card-content { padding: .75rem; }
             .projects-grid.is-poster .card-title { font-size: 1rem; }
         }
+
+        .planning-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; flex-wrap: wrap; border-bottom: 1px solid #eee; }
+        .planning-bar h3 { font-size: 1.1rem; }
+        .planning-tools { display: flex; align-items: center; gap: 1rem; }
+        .planning-tools a, .planning-tools button { font: inherit; font-size: .85rem; color: #333; }
+        .planning-tools a { text-decoration: none; }
+        .planning-tools button { padding: .4rem .65rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; }
+        #planning-sheet { display: block; width: 100%; height: clamp(560px, 80vh, 900px); border: 0; background: #fafafa; }
     </style>
 </head>
 <body>
@@ -668,7 +676,7 @@
                 <button class="filter-btn" data-filter="product">产品视频</button>
                 <button class="filter-btn" data-filter="marketing">营销视频</button>
                 <button class="filter-btn" data-filter="aigc">AIGC视频</button>
-                <button class="filter-btn" data-filter="strategy">营销策划 &amp; 代言人</button>
+                <button class="filter-btn" data-filter="strategy">营销策划</button>
             </div>
 
             <div class="projects-grid" id="projects-container">
@@ -703,12 +711,15 @@
                 </div>
               
                 <!-- 项目 3 : 代言人策略 + 创意视觉整合案例 -->
-                <div class="project-card" data-category="strategy" style="display: block;">
-                    <div class="card-content">
-                        <div class="card-category">营销策划 · 代言人选择</div>
-                        <div class="card-title">运动品牌 × 全能艺人代言出圈</div>
-                        <div class="card-desc">基于粉丝数据与受众洞察选定代言人，制造破圈话题，整合线下快闪+social视频，品牌声量提升210%，商业转化增长35%。</div>
+                <div class="project-card project-card-wide planning-card" data-category="strategy">
+                    <div class="planning-bar">
+                        <h3>营销方案</h3>
+                        <div class="planning-tools">
+                            <button type="button" id="refresh-planning">刷新表格</button>
+                            <a href="https://my.feishu.cn/sheets/CJ4bs41QdhGJwDtEc0icRxtsnqe" target="_blank" rel="noopener noreferrer">在飞书中查看 ↗</a>
+                        </div>
                     </div>
+                    <iframe id="planning-sheet" data-src="https://my.feishu.cn/sheets/CJ4bs41QdhGJwDtEc0icRxtsnqe" title="飞书营销方案表格" loading="lazy" allowfullscreen></iframe>
                 </div>
 
                 <!-- 项目 4 : 节日情感营销视频系列 (社媒高互动) -->
@@ -781,13 +792,7 @@
 
 
                 <!-- 项目 7 : 营销策划案-新品整合营销战役 -->
-                <div class="project-card" data-category="strategy" style="display: block;">
-                    <div class="card-content">
-                        <div class="card-category">策划案 · 商业增长</div>
-                        <div class="card-title">飞科博锐「锋芒新生」上市计划</div>
-                        <div class="card-desc">制定从预热期到转化期的完整营销策略，包含代言人适配矩阵、抖音挑战赛及电商视觉，ROI较上一代产品提高62%。</div>
-                    </div>
-                </div>
+                
 
                 <div class="project-card project-card-wide" data-category="poster" data-order="6" style="display: block;">
                     <div class="card-media card-media-img">
@@ -917,7 +922,7 @@
                         <button type="button" class="project-group-btn" data-filter="product">产品视频</button>
                         <button type="button" class="project-group-btn" data-filter="marketing">营销视频</button>
                         <button type="button" class="project-group-btn" data-filter="aigc">AIGC视频</button>
-                        <button type="button" class="project-group-btn" data-filter="strategy">营销策划 &amp; 代言人</button>
+                        <button type="button" class="project-group-btn" data-filter="strategy">营销策划</button>
                     </nav>
                 </details>
             </aside>
@@ -1012,6 +1017,8 @@
         }
 
         function filterProjects(category, scroll = false) {
+            const sheet = document.getElementById('planning-sheet');
+            if (category === 'strategy' && !sheet.hasAttribute('src')) sheet.src = sheet.dataset.src;
             document.getElementById('projects-container').classList.toggle('is-poster', category === 'poster');
             projects.forEach(proj => {
                 const visible = proj.dataset.category === category;
@@ -1057,6 +1064,10 @@
                     window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
                 }
             });
+        });
+        document.getElementById('refresh-planning').addEventListener('click', () => {
+            const sheet = document.getElementById('planning-sheet');
+            sheet.src = sheet.dataset.src;
         });
         filterProjects('poster');
 
