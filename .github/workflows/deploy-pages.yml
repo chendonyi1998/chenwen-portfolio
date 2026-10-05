@@ -32,6 +32,16 @@ jobs:
       - name: Ensure no Jekyll processing
         run: touch .nojekyll
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate 960px image previews
+        run: |
+          python -m pip install Pillow==11.3.0
+          python scripts/generate_thumbnails.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
