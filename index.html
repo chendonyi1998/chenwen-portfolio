@@ -266,16 +266,6 @@
             margin-bottom: 1rem;
         }
 
-        .skill-badge {
-            display: inline-block;
-            background: #f2f2f2;
-            border-radius: 30px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            color: #2e2e2e;
-        }
 
         /* 能力展示区 */
         .capabilities {
@@ -596,6 +586,28 @@
             transform-origin: center center;
             will-change: transform;
         }
+
+        /* 精选项目的分组导航 */
+        #work { scroll-margin-top: 110px; }
+        .work-layout { display: grid; grid-template-columns: minmax(0, 1fr) 170px; gap: 2rem; align-items: start; }
+        .work-main { min-width: 0; }
+        .project-sidebar { position: sticky; top: 110px; }
+        .project-sidebar details { background: #fff; border: 1px solid #eee; border-radius: 18px; padding: 1rem; box-shadow: 0 8px 24px rgba(0,0,0,.04); }
+        .project-sidebar summary { display: none; cursor: pointer; font-weight: 600; }
+        .project-sidebar-label { margin-bottom: .6rem; font-size: .8rem; color: #777; }
+        .project-sidebar nav { display: flex; flex-direction: column; gap: .35rem; }
+        .project-group-btn { text-align: left; background: transparent; border: 0; border-radius: 10px; padding: .7rem .6rem; font: inherit; font-size: .85rem; color: #666; cursor: pointer; }
+        .project-group-btn:hover, .project-group-btn.active { background: #f2f2f2; color: #000; }
+        .filter-btn:focus-visible, .project-group-btn:focus-visible, .project-sidebar summary:focus-visible { outline: 2px solid #333; outline-offset: 3px; }
+        @media (max-width: 768px) {
+            .work-layout { display: block; }
+            .project-sidebar { position: fixed; right: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); top: auto; z-index: 90; max-width: calc(100vw - 2rem); }
+            .project-sidebar:not(.in-work) { display: none; }
+            .project-sidebar details { padding: .8rem 1rem; max-height: 65vh; overflow: auto; }
+            .project-sidebar summary { display: block; font-size: .85rem; }
+            .project-sidebar-label { display: none; }
+            .project-sidebar nav { margin-top: .7rem; }
+        }
     </style>
 </head>
 <body>
@@ -625,9 +637,10 @@
         <div id="work" class="container section">
             <h2 class="section-title">精选项目</h2>
             
+            <div class="work-layout">
+            <div class="work-main">
             <div class="filter-tag" id="filter-buttons">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="poster">平面</button>
+                <button class="filter-btn active" data-filter="poster">平面</button>
                 <button class="filter-btn" data-filter="product">产品视频</button>
                 <button class="filter-btn" data-filter="marketing">营销视频</button>
                 <button class="filter-btn" data-filter="aigc">AIGC视频</button>
@@ -645,7 +658,6 @@
                         </button>
                         <div class="card-title">博锐P20剃须刀</div>
                         <div class="card-desc">制作产品一镜到底卖点展示视频，以流畅镜头撬动产品叙事，镜头质量比肩一线品牌。</div>
-                        <span class="skill-badge">CGI制作</span>
                     </div>
                 </div>
                 
@@ -658,7 +670,6 @@
                         </button>
                         <div class="card-title">博锐520情人节</div>
                         <div class="card-desc">你出现时，心动就有了定义。因爱同频，共享你我的同频心跳。这个 520，博锐化身告白助攻。让爱同频，心动0距离 🩵 🩵</div>
-                        <span class="skill-badge">CGI制作</span>
                         <p class="card-link">
                             <a target="_blank" rel="noopener noreferrer" href="https://my.feishu.cn/slides/WWigsghEYld9qEdlTL4cwQclnkg?from=from_copylink">
             🔗 查看飞书完整策划文档
@@ -673,9 +684,6 @@
                         <div class="card-category">营销策划 · 代言人选择</div>
                         <div class="card-title">运动品牌 × 全能艺人代言出圈</div>
                         <div class="card-desc">基于粉丝数据与受众洞察选定代言人，制造破圈话题，整合线下快闪+social视频，品牌声量提升210%，商业转化增长35%。</div>
-                        <span class="skill-badge">粉丝调研</span>
-                        <span class="skill-badge">整合营销</span>
-                        <span class="skill-badge">媒介策略</span>
                     </div>
                 </div>
 
@@ -688,8 +696,6 @@
                         </button>
                         <div class="card-title">博锐太空胶囊 P0剃须刀</div>
                         <div class="card-desc">策划并制作三维营销视频，打造“宇宙级净剃”品类技术符号，树立新锐科技形象，强化“迷你机身、旗舰性能”卖点，赋能电商与线下销售</div>
-                        <span class="skill-badge">CGI制作</span>
-                        <span class="skill-badge">脚本策划</span>
                         <p class="card-link">
                             <a target="_blank" rel="noopener noreferrer" href="https://my.feishu.cn/slides/QOdns0ub8l1ED1dirsoc13D7nyf?from=from_copylink">
             🔗 查看飞书完整策划文档
@@ -722,8 +728,6 @@
                         <div class="card-category">策划案 · 商业增长</div>
                         <div class="card-title">飞科博锐「锋芒新生」上市计划</div>
                         <div class="card-desc">制定从预热期到转化期的完整营销策略，包含代言人适配矩阵、抖音挑战赛及电商视觉，ROI较上一代产品提高62%。</div>
-                        <span class="skill-badge">数据洞察</span>
-                        <span class="skill-badge">跨媒介协作</span>
                     </div>
                 </div>
 
@@ -733,9 +737,6 @@
                         <div class="card-category">实验性视觉 · 前沿工具</div>
                         <div class="card-title">都市漫游者系列</div>
                         <div class="card-desc">使用Midjourney &amp; Runway生成概念素材并二次设计，以超现实风格表达品牌年轻化主张，获得内部创意奖与社交媒体热议。</div>
-                        <span class="skill-badge">Midjourney</span>
-                        <span class="skill-badge">Runway</span>
-                        <span class="skill-badge">后期合成</span>
                     </div>
                 </div>
 
@@ -748,7 +749,6 @@
                         </button>
                         <div class="card-title">P001剃须刀</div>
                         <div class="card-desc">以掌中潮品的概念传递年轻人个性张扬，随身而行的锐气态度。</div>
-                        <span class="skill-badge">CGI制作</span>
                     </div>
                 </div>
 
@@ -761,7 +761,6 @@
                         </button>
                         <div class="card-title">七夕视频</div>
                         <div class="card-desc">轻巧随行，贴面净剃<br>星河为引，心动为礼<br>这个七夕，独属于你的浪漫，只为特别的你</div>
-                        <span class="skill-badge">AIGC</span>
                     </div>
                 </div>
 
@@ -774,7 +773,6 @@
                         </button>
                         <div class="card-title">中秋视频</div>
                         <div class="card-desc">愿所有奔赴 终有月色与团圆</div>
-                        <span class="skill-badge">AIGC</span>
                     </div>
                 </div>
 
@@ -787,7 +785,6 @@
                         </button>
                         <div class="card-title">父亲节视频</div>
                         <div class="card-desc">穿过岁月的云海，总有一束光，为我照亮前行的路。<br>从前你是我的靠山，未来换我守护你</div>
-                        <span class="skill-badge">AIGC</span>
                     </div>
                 </div>
 
@@ -800,7 +797,6 @@
                         </button>
                         <div class="card-title">GEMO金茉胶原美容仪</div>
                         <div class="card-desc">光之绮梦，胶原新生。以浓郁光影流转，隐喻胶原焕活，营造轻奢梦幻。</div>
-                        <span class="skill-badge">三维视频</span>
                     </div>
                 </div>
 
@@ -813,7 +809,6 @@
                         </button>
                         <div class="card-title">成分球展架篇</div>
                         <div class="card-desc">在这了不起的节日里功效护肤品牌——<br>#DGR为您聚力54个“了不起”的「DGR功效成分球」<br>ta们经由层层筛选协同为求美者实现精准护肤。</div>
-                        <span class="skill-badge">三维视频</span>
                     </div>
                 </div>
 
@@ -826,7 +821,6 @@
                         </button>
                         <div class="card-title">化妆品中秋上市篇</div>
                         <div class="card-desc">中秋皆圆满 皎月映芳华<br>DGR舒缓修护组合PRO 即将上市<br>抑·消·修·防·抗<br>为你，守护那一抹「白月光」</div>
-                        <span class="skill-badge">三维视频</span>
                     </div>
                 </div>
 
@@ -839,7 +833,6 @@
                         </button>
                         <div class="card-title">音响概念篇</div>
                         <div class="card-desc">一曲流转，生命盛放。每个音符，都是春天的礼赞。</div>
-                        <span class="skill-badge">三维视频</span>
                     </div>
                 </div>
 
@@ -852,10 +845,25 @@
                         </button>
                         <div class="card-title">博锐吹风机——为她夺回时间主权</div>
                         <div class="card-desc">吹发焦虑？一键清零！#博锐高速吹风机 11万转每分钟，干发新速度，时间立省下。</div>
-                        <span class="skill-badge">三维视频</span>
                     </div>
                 </div>
 
+            </div>
+
+            </div>
+            <aside class="project-sidebar" aria-label="精选项目分组">
+                <details open>
+                    <summary>切换分组 · <span id="current-project-group">平面</span></summary>
+                    <div class="project-sidebar-label">精选项目</div>
+                    <nav aria-label="切换精选项目分组">
+                        <button type="button" class="project-group-btn active" data-filter="poster">平面</button>
+                        <button type="button" class="project-group-btn" data-filter="product">产品视频</button>
+                        <button type="button" class="project-group-btn" data-filter="marketing">营销视频</button>
+                        <button type="button" class="project-group-btn" data-filter="aigc">AIGC视频</button>
+                        <button type="button" class="project-group-btn" data-filter="strategy">营销策划 &amp; 代言人</button>
+                    </nav>
+                </details>
+            </aside>
             </div>
         </div>
 
@@ -931,60 +939,68 @@
     </footer>
 
     <script>
-        // 简单的筛选交互，增强作品集展示的专业感
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projects = document.querySelectorAll('.project-card');
 
-        function filterProjects(category) {
+        const filterBtns = document.querySelectorAll('#filter-buttons .filter-btn, .project-group-btn');
+        const projects = document.querySelectorAll('.project-card');
+        const workSection = document.getElementById('work');
+        const sidebar = document.querySelector('.project-sidebar');
+        const sidebarDetails = sidebar.querySelector('details');
+        const mobileLayout = window.matchMedia('(max-width: 768px)');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function scrollToProjects() {
+            const header = document.querySelector('.navbar');
+            const top = workSection.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 16;
+            window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+        }
+
+        function filterProjects(category, scroll = false) {
             projects.forEach(proj => {
-                const projCat = proj.getAttribute('data-category');
-                if (category === 'all' || projCat === category) {
-                    proj.style.display = 'block';
-                    const ord = proj.getAttribute('data-order');
-                    proj.style.order = (category !== 'all' && ord) ? ord : '';
-                } else {
-                    proj.style.display = 'none';
-                    proj.style.order = '';
-                }
+                const visible = proj.dataset.category === category;
+                proj.style.display = visible ? 'block' : 'none';
+                proj.style.order = visible ? (proj.dataset.order || '') : '';
+                if (!visible) proj.querySelectorAll('video').forEach(video => video.pause());
             });
-            // 重新调整grid布局（隐藏时不会有空行）
-            const grid = document.getElementById('projects-container');
-            // 改变display会造成布局闪烁，但无伤大雅
+            filterBtns.forEach(btn => {
+                const active = btn.dataset.filter === category;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', String(active));
+            });
+            const selected = document.querySelector('#filter-buttons [data-filter="' + category + '"]');
+            document.getElementById('current-project-group').textContent = selected.textContent;
+            if (mobileLayout.matches && scroll) sidebarDetails.open = false;
+            if (scroll) scrollToProjects();
         }
 
         filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filterValue = btn.getAttribute('data-filter');
-                filterProjects(filterValue);
-            });
+            btn.addEventListener('click', () => filterProjects(btn.dataset.filter, true));
         });
 
-        // 平滑滚动 + 主动初始化展示全部
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
+        function updateSidebarLayout() { sidebarDetails.open = !mobileLayout.matches; }
+        updateSidebarLayout();
+        mobileLayout.addEventListener('change', updateSidebarLayout);
+        if ('IntersectionObserver' in window) {
+            const sidebarObserver = new IntersectionObserver(entries => {
+                sidebar.classList.toggle('in-work', entries[0].isIntersecting);
+            }, { rootMargin: '-100px 0px 0px 0px' });
+            sidebarObserver.observe(workSection);
+        } else { sidebar.classList.add('in-work'); }
+
+        document.querySelectorAll('.nav-links a, .btn[href="#work"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if(targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                if (!href || !href.startsWith('#')) return;
+                const target = document.getElementById(href.substring(1));
+                if (!target) return;
+                e.preventDefault();
+                if (target === workSection) scrollToProjects();
+                else {
+                    const top = target.getBoundingClientRect().top + window.scrollY - document.querySelector('.navbar').offsetHeight - 16;
+                    window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
                 }
             });
         });
-        // 确保hero按钮也平滑滚动
-        const workBtn = document.querySelector('.btn[href="#work"]');
-        if(workBtn) {
-            workBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
-            });
-        }
-        // 初始化全部显示
-        filterProjects('all');
+        filterProjects('poster');
 
         /* 图片放大查看：滚轮 / 按钮缩放，拖动平移，Esc 关闭 */
         document.addEventListener('DOMContentLoaded', function () {
