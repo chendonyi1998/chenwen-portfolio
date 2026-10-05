@@ -640,6 +640,10 @@
         .planning-tools a { text-decoration: none; }
         .planning-tools button { padding: .4rem .65rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; }
         #planning-sheet { display: block; width: 100%; height: clamp(560px, 80vh, 900px); border: 0; background: #fafafa; }
+
+        .preview-status { position: absolute; left: .6rem; bottom: .6rem; padding: .2rem .6rem; background: rgba(0,0,0,.65); color: #fff; border-radius: 8px; font-size: .75rem; line-height: 1.5; pointer-events: none; }
+        .preview-status[hidden], .preview-play-btn[hidden] { display: none; }
+        .preview-play-btn { display: block; margin: -.3rem 0 1rem; border: 1px solid #ddd; border-radius: 10px; padding: .5rem .8rem; background: #fff; color: #222; font: inherit; font-size: .85rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -685,8 +689,9 @@
                 <div class="project-card" data-category="product" data-order="4" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P21_JP.mp4" aria-label="点击播放高清视频：博锐P20剃须刀">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P21_JP.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-P21_JP.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P21_JP.mp4" poster="posters/preview-P21_JP.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">博锐P20剃须刀</div>
                         <div class="card-desc">制作产品一镜到底卖点展示视频，以流畅镜头撬动产品叙事，镜头质量比肩一线品牌。</div>
@@ -697,8 +702,9 @@
                 <div class="project-card" data-category="marketing" data-order="1" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/520.mp4" aria-label="点击播放高清视频：博锐520情人节">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-520.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-520.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-520.mp4" poster="posters/preview-520.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">博锐520情人节</div>
                         <div class="card-desc">你出现时，心动就有了定义。因爱同频，共享你我的同频心跳。这个 520，博锐化身告白助攻。让爱同频，心动0距离 🩵 🩵</div>
@@ -726,8 +732,9 @@
                 <div class="project-card" data-category="product" data-order="2" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P0.mp4" aria-label="点击播放高清视频：博锐太空胶囊 P0剃须刀">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P0.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-P0.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P0.mp4" poster="posters/preview-P0.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">博锐太空胶囊 P0剃须刀</div>
                         <div class="card-desc">策划并制作三维营销视频，打造“宇宙级净剃”品类技术符号，树立新锐科技形象，强化“迷你机身、旗舰性能”卖点，赋能电商与线下销售</div>
@@ -806,8 +813,9 @@
                 <div class="project-card" data-category="product" data-order="1" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P001.mp4" aria-label="点击播放高清视频：P001剃须刀">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P001.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-P001.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P001.mp4" poster="posters/preview-P001.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">P001剃须刀</div>
                         <div class="card-desc">以掌中潮品的概念传递年轻人个性张扬，随身而行的锐气态度。</div>
@@ -818,8 +826,9 @@
                 <div class="project-card" data-category="aigc" style="display: block;">
                     <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/qixi.mp4" aria-label="点击播放高清视频：七夕视频">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-qixi.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-qixi.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-qixi.mp4" poster="posters/preview-qixi.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">七夕视频</div>
                         <div class="card-desc">轻巧随行，贴面净剃<br>星河为引，心动为礼<br>这个七夕，独属于你的浪漫，只为特别的你</div>
@@ -830,8 +839,9 @@
                 <div class="project-card" data-category="aigc" style="display: block;">
                     <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/zhonqiu.mp4" aria-label="点击播放高清视频：中秋视频">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-zhonqiu.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-zhonqiu.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-zhonqiu.mp4" poster="posters/preview-zhonqiu.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">中秋视频</div>
                         <div class="card-desc">愿所有奔赴 终有月色与团圆</div>
@@ -842,8 +852,9 @@
                 <div class="project-card" data-category="aigc" style="display: block;">
                     <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/fuqinjie.mp4" aria-label="点击播放高清视频：父亲节视频">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-fuqinjie.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-fuqinjie.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-fuqinjie.mp4" poster="posters/preview-fuqinjie.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">父亲节视频</div>
                         <div class="card-desc">穿过岁月的云海，总有一束光，为我照亮前行的路。<br>从前你是我的靠山，未来换我守护你</div>
@@ -854,8 +865,9 @@
                 <div class="project-card" data-category="marketing" data-order="2" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/gemo.mp4" aria-label="点击播放高清视频：GEMO金茉胶原美容仪">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-gemo.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-gemo.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-gemo.mp4" poster="posters/preview-gemo.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">GEMO金茉胶原美容仪</div>
                         <div class="card-desc">光之绮梦，胶原新生。以浓郁光影流转，隐喻胶原焕活，营造轻奢梦幻。</div>
@@ -866,8 +878,9 @@
                 <div class="project-card" data-category="marketing" data-order="3" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/hzpgq.mp4" aria-label="点击播放高清视频：成分球展架篇">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-hzpgq.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-hzpgq.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-hzpgq.mp4" poster="posters/preview-hzpgq.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">成分球展架篇</div>
                         <div class="card-desc">在这了不起的节日里功效护肤品牌——<br>#DGR为您聚力54个“了不起”的「DGR功效成分球」<br>ta们经由层层筛选协同为求美者实现精准护肤。</div>
@@ -878,8 +891,9 @@
                 <div class="project-card" data-category="marketing" data-order="4" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/HZPZQ.mp4" aria-label="点击播放高清视频：化妆品中秋上市篇">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-HZPZQ.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-HZPZQ.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-HZPZQ.mp4" poster="posters/preview-HZPZQ.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">化妆品中秋上市篇</div>
                         <div class="card-desc">中秋皆圆满 皎月映芳华<br>DGR舒缓修护组合PRO 即将上市<br>抑·消·修·防·抗<br>为你，守护那一抹「白月光」</div>
@@ -890,8 +904,9 @@
                 <div class="project-card" data-category="product" data-order="3" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/linekepy.mp4" aria-label="点击播放高清视频：音响概念篇">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-linekepy.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-linekepy.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-linekepy.mp4" poster="posters/preview-linekepy.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">音响概念篇</div>
                         <div class="card-desc">一曲流转，生命盛放。每个音符，都是春天的礼赞。</div>
@@ -902,8 +917,9 @@
                 <div class="project-card" data-category="marketing" data-order="5" style="display: block;">
                         <div class="card-content">
                         <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/38.mp4" aria-label="点击播放高清视频：博锐吹风机——为她夺回时间主权">
-                            <video data-src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-38.mp4" muted loop playsinline preload="metadata"></video>
+                            <video data-src="previews/preview-38.mp4" data-preview-source="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-38.mp4" poster="posters/preview-38.webp" muted loop playsinline webkit-playsinline preload="metadata"></video>
                             <span class="video-hint">高清</span>
+                            <span class="preview-status" role="status" aria-live="polite" hidden></span>
                         </button>
                         <div class="card-title">博锐吹风机——为她夺回时间主权</div>
                         <div class="card-desc">吹发焦虑？一键清零！#博锐高速吹风机 11万转每分钟，干发新速度，时间立省下。</div>
@@ -1255,7 +1271,7 @@
             });
         });
 
-        /* 视频预览：接近视野才加载，在视野内且无弹层时播放 */
+        /* 视频预览：选中分组即加载全部小视频，屏幕内播放 */
         document.addEventListener('DOMContentLoaded', function () {
             const triggers = document.querySelectorAll('.video-trigger');
             const previews = document.querySelectorAll('.video-trigger video');
@@ -1264,31 +1280,84 @@
             const hd = document.getElementById('lightbox-video');
             if (!box || !hd) return;
             const visible = new Set();
-            const near = new Set();
 
             function modalOpen() {
                 return !!document.querySelector('.lightbox:not([hidden]), .video-lightbox:not([hidden])');
             }
+            const previewUI = new WeakMap();
+            previews.forEach(function (v) {
+                v.muted = true;
+                v.defaultMuted = true;
+                v.playsInline = true;
+                v.setAttribute('webkit-playsinline', '');
+                const trigger = v.closest('.video-trigger');
+                const status = trigger.querySelector('.preview-status');
+                const retry = document.createElement('button');
+                retry.type = 'button';
+                retry.className = 'preview-play-btn';
+                retry.textContent = '播放预览';
+                retry.setAttribute('aria-label', '播放小视频预览：' + trigger.getAttribute('aria-label').replace('点击播放高清视频：', ''));
+                retry.hidden = true;
+                trigger.after(retry);
+                const ui = { status, retry, playing: false, pending: false };
+                previewUI.set(v, ui);
+                function show(message) { status.textContent = message; status.hidden = !message; }
+                v.addEventListener('loadstart', function () { show('预览加载中…'); });
+                v.addEventListener('waiting', function () { show('预览缓冲中…'); });
+                v.addEventListener('playing', function () {
+                    ui.playing = true; ui.pending = false; show(''); retry.hidden = true;
+                });
+                v.addEventListener('error', function () {
+                    ui.pending = false; show('预览暂时无法加载，可点击查看高清'); retry.hidden = false;
+                });
+                retry.addEventListener('click', function () {
+                    if (v.error) { v.removeAttribute('src'); v.load(); }
+                    visible.add(v); load(v); play(v, true);
+                });
+            });
             function load(v) {
                 if (!v.hasAttribute('src') && v.dataset.src) {
+                    v.muted = true;
                     v.src = v.dataset.src;
                     v.load();
                 }
             }
-            function play(v) {
+            function play(v, userGesture = false) {
+                const ui = previewUI.get(v);
+                if (ui && ui.pending && !userGesture) return;
+                if (ui) {
+                    ui.pending = true;
+                    v.muted = true;
+                    v.defaultMuted = true;
+                    v.playsInline = true;
+                    v.autoplay = true;
+                }
                 const promise = v.play();
-                if (promise && promise.catch) promise.catch(function () {});
+                if (promise && promise.catch) promise.catch(function (err) {
+                    if (!ui) return;
+                    ui.pending = false;
+                    if (err.name === 'AbortError') return;
+                    ui.status.textContent = err.name === 'NotAllowedError' ? '点击下方播放预览' : '预览暂时无法播放，可点击查看高清';
+                    ui.status.hidden = false;
+                    ui.retry.hidden = false;
+                });
+            }
+            function pause(v) {
+                v.autoplay = false;
+                v.pause();
+                const ui = previewUI.get(v);
+                if (ui) ui.pending = false;
             }
             function sync() {
                 const allowed = !document.hidden && !modalOpen();
                 previews.forEach(function (v) {
                     const cardVisible = v.closest('.project-card').style.display !== 'none';
                     if (allowed && cardVisible && visible.has(v)) { load(v); play(v); }
-                    else v.pause();
+                    else pause(v);
                 });
             }
             function openHD(src) {
-                previews.forEach(function (v) { v.pause(); });
+                previews.forEach(function (v) { pause(v); });
                 hd.src = src;
                 box.hidden = false;
                 document.body.style.overflow = 'hidden';
@@ -1319,46 +1388,41 @@
                 sync();
             });
             document.addEventListener('portfolio:modal-change', sync);
-            document.addEventListener('portfolio:filter-change', function () {
+            function updateVisible() {
                 previews.forEach(function (v) {
-                    if (v.closest('.project-card').style.display === 'none') {
-                        visible.delete(v); near.delete(v); v.pause();
-                    }
+                    const rect = v.getBoundingClientRect();
+                    const shown = v.closest('.project-card').style.display !== 'none' && rect.width > 0 && rect.height > 0;
+                    const visibleHeight = Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0));
+                    if (shown && visibleHeight >= rect.height * 0.2) visible.add(v);
+                    else visible.delete(v);
                 });
                 sync();
-            });
-            if ('IntersectionObserver' in window) {
-                const loader = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (en) {
-                        if (en.isIntersecting && en.target.closest('.project-card').style.display !== 'none') {
-                            near.add(en.target);
-                            if (!document.hidden && !modalOpen()) load(en.target);
-                        } else near.delete(en.target);
-                    });
-                }, { rootMargin: '200px 0px', threshold: 0 });
-                const player = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (en) {
-                        if (en.isIntersecting && en.intersectionRatio >= 0.35) visible.add(en.target);
-                        else visible.delete(en.target);
-                    });
-                    sync();
-                }, { threshold: [0, 0.35] });
-                previews.forEach(function (v) { loader.observe(v); player.observe(v); });
-            } else {
-                function updateVisible() {
-                    previews.forEach(function (v) {
-                        const r = v.getBoundingClientRect();
-                        const shown = v.closest('.project-card').style.display !== 'none' && r.height > 0;
-                        if (shown && r.bottom > 0 && r.top < innerHeight) visible.add(v);
-                        else visible.delete(v);
-                    });
-                    sync();
-                }
-                window.addEventListener('scroll', updateVisible, { passive: true });
-                window.addEventListener('resize', updateVisible);
-                document.addEventListener('portfolio:filter-change', updateVisible);
-                updateVisible();
             }
+            function loadSelectedGroup() {
+                previews.forEach(function (v) {
+                    if (v.closest('.project-card').style.display !== 'none') {
+                        v.preload = 'auto';
+                        load(v);
+                    } else {
+                        visible.delete(v);
+                        pause(v);
+                    }
+                });
+                updateVisible();
+                requestAnimationFrame(updateVisible);
+            }
+            let updateScheduled = false;
+            function scheduleUpdate() {
+                if (updateScheduled) return;
+                updateScheduled = true;
+                requestAnimationFrame(function () { updateScheduled = false; updateVisible(); });
+            }
+            window.addEventListener('scroll', scheduleUpdate, { passive: true });
+            window.addEventListener('resize', scheduleUpdate);
+            document.addEventListener('portfolio:filter-change', loadSelectedGroup);
+            document.addEventListener('portfolio:modal-change', updateVisible);
+            document.addEventListener('visibilitychange', updateVisible);
+            loadSelectedGroup();
         });
 
         /* 弹层的键盘焦点和背景预览暂停 */

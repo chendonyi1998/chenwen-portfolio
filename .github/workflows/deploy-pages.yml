@@ -42,6 +42,14 @@ jobs:
           python -m pip install Pillow==11.3.0
           python scripts/generate_thumbnails.py
 
+      - name: Prepare inline video previews and covers
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+          python scripts/prepare_video_previews.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
