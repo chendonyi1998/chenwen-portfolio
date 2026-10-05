@@ -397,14 +397,69 @@
             margin-bottom: 1rem;
         }
 
-        .card-content video {
+        .video-trigger {
+            display: block;
+            position: relative;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            line-height: 0;
+            margin-bottom: 1rem;
+        }
+
+        .video-trigger video {
             width: 100%;
             height: 220px;
-            border-radius: 16px;
             display: block;
-            margin-bottom: 1rem;
-            background: #000;
             object-fit: contain;
+            background: #000;
+        }
+
+        .video-hint {
+            position: absolute;
+            right: 0.6rem;
+            bottom: 0.6rem;
+            padding: 0.1rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            line-height: 1.7;
+            pointer-events: none;
+        }
+
+        .video-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(8, 8, 8, 0.96);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-lightbox[hidden] {
+            display: none;
+        }
+
+        .video-stage {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem 1.2rem;
+        }
+
+        .video-stage video {
+            max-width: 100%;
+            max-height: 100%;
+            background: #000;
+            border-radius: 12px;
         }
 
         .card-media-img {
@@ -461,7 +516,7 @@
 
         @media (max-width: 768px) {
             .card-content iframe,
-            .card-content video {
+            .video-trigger video {
                 height: 190px;
             }
         }
@@ -617,7 +672,11 @@
 
                 <!-- 项目 4 : 节日情感营销视频系列 (社媒高互动) -->
                 <div class="project-card" data-category="video" style="display: block;">
-                    <div class="card-content"><video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P0.mp4" controls playsinline preload="metadata"></video>
+                    <div class="card-content">
+                        <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P0.mp4" aria-label="点击播放高清视频：博锐太空胶囊 P0剃须刀">
+                            <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P0.mp4" muted loop playsinline preload="metadata"></video>
+                            <span class="video-hint">高清</span>
+                        </button>
                         <div class="card-title">博锐太空胶囊 P0剃须刀</div>
                         <div class="card-desc">策划并制作三维营销视频，打造“宇宙级净剃”品类技术符号，树立新锐科技形象，强化“迷你机身、旗舰性能”卖点，赋能电商与线下销售</div>
                         <span class="skill-badge">CGI制作</span>
@@ -674,7 +733,10 @@
                 <!-- 项目 9 : 产品视觉短片（视频托管在 GitHub Releases） -->
                 <div class="project-card" data-category="video" style="display: block;">
                     <div class="card-content">
-                        <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P001.mp4" controls playsinline preload="metadata"></video>
+                        <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/P001.mp4" aria-label="点击播放高清视频：P001剃须刀">
+                            <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-P001.mp4" muted loop playsinline preload="metadata"></video>
+                            <span class="video-hint">高清</span>
+                        </button>
                         <div class="card-title">P001剃须刀</div>
                         <div class="card-desc">以掌中潮品的概念传递年轻人个性张扬，随身而行的锐气态度。</div>
                         <span class="skill-badge">CGI制作</span>
@@ -684,7 +746,10 @@
                 <!-- AIGC 视频：七夕 -->
                 <div class="project-card" data-category="aigc" style="display: block;">
                     <div class="card-content">
-                        <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/qixi.mp4" controls playsinline preload="metadata"></video>
+                        <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/qixi.mp4" aria-label="点击播放高清视频：七夕视频">
+                            <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-qixi.mp4" muted loop playsinline preload="metadata"></video>
+                            <span class="video-hint">高清</span>
+                        </button>
                         <div class="card-title">七夕视频</div>
                         <div class="card-desc">轻巧随行，贴面净剃<br>星河为引，心动为礼<br>这个七夕，独属于你的浪漫，只为特别的你</div>
                         <span class="skill-badge">AIGC</span>
@@ -694,7 +759,10 @@
                 <!-- AIGC 视频：中秋 -->
                 <div class="project-card" data-category="aigc" style="display: block;">
                     <div class="card-content">
-                        <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/zhonqiu.mp4" controls playsinline preload="metadata"></video>
+                        <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/zhonqiu.mp4" aria-label="点击播放高清视频：中秋视频">
+                            <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-zhonqiu.mp4" muted loop playsinline preload="metadata"></video>
+                            <span class="video-hint">高清</span>
+                        </button>
                         <div class="card-title">中秋视频</div>
                         <div class="card-desc">愿所有奔赴 终有月色与团圆</div>
                         <span class="skill-badge">AIGC</span>
@@ -704,7 +772,10 @@
                 <!-- AIGC 视频：父亲节 -->
                 <div class="project-card" data-category="aigc" style="display: block;">
                     <div class="card-content">
-                        <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/fuqinjie.mp4" controls playsinline preload="metadata"></video>
+                        <button type="button" class="video-trigger" data-hd="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/fuqinjie.mp4" aria-label="点击播放高清视频：父亲节视频">
+                            <video src="https://github.com/chendonyi1998/chenwen-portfolio/releases/download/media/preview-fuqinjie.mp4" muted loop playsinline preload="metadata"></video>
+                            <span class="video-hint">高清</span>
+                        </button>
                         <div class="card-title">父亲节视频</div>
                         <div class="card-desc">穿过岁月的云海，总有一束光，为我照亮前行的路。<br>从前你是我的靠山，未来换我守护你</div>
                         <span class="skill-badge">AIGC</span>
@@ -998,9 +1069,79 @@
                 if (e.key === 'Escape' || e.keyCode === 27) closeBox();
             });
         });
+
+        /* 视频：缩略图仅在视野内自动循环播放，点击打开高清 */
+        document.addEventListener('DOMContentLoaded', function () {
+            const triggers = document.querySelectorAll('.video-trigger');
+            const box = document.getElementById('video-lightbox');
+            const stage = document.getElementById('video-stage');
+            const hd = document.getElementById('lightbox-video');
+            if (!box || !hd) return;
+
+            let activePreview = null;
+
+            function play(v) {
+                const p = v.play();
+                if (p && p.catch) p.catch(function () {});
+            }
+
+            function openHD(src, preview) {
+                if (preview) {
+                    preview.pause();
+                    activePreview = preview;
+                }
+                hd.src = src;
+                box.hidden = false;
+                document.body.style.overflow = 'hidden';
+                try { hd.currentTime = 0; } catch (err) {}
+                play(hd);
+            }
+
+            function closeHD() {
+                box.hidden = true;
+                document.body.style.overflow = '';
+                hd.pause();
+                hd.removeAttribute('src');
+                hd.load();
+                if (activePreview) {
+                    play(activePreview);
+                    activePreview = null;
+                }
+            }
+
+            triggers.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    openHD(btn.getAttribute('data-hd'), btn.querySelector('video'));
+                });
+            });
+
+            box.addEventListener('click', function (e) {
+                const act = e.target.closest('[data-action]');
+                if (act && act.getAttribute('data-action') === 'close') { closeHD(); return; }
+                if (e.target === stage) closeHD();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (box.hidden) return;
+                if (e.key === 'Escape' || e.keyCode === 27) closeHD();
+            });
+
+            const previews = document.querySelectorAll('.video-trigger video');
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting) play(en.target);
+                        else en.target.pause();
+                    });
+                }, { threshold: 0.35 });
+                previews.forEach(function (v) { io.observe(v); });
+            } else {
+                previews.forEach(play);
+            }
+        });
     </script>
 
-+    <!-- 图片放大查看 -->
+    <!-- 图片放大查看 -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片放大查看" hidden>
         <div class="lightbox-bar">
             <span class="lightbox-hint">滚轮或按钮缩放 · 拖动图片平移 · 点击空白处或 Esc 关闭</span>
@@ -1013,6 +1154,19 @@
         </div>
         <div class="lightbox-stage" id="lightbox-stage">
             <img id="lightbox-img" alt="">
+        </div>
+    </div>
+
+    <!-- 视频放大播放 -->
+    <div class="video-lightbox" id="video-lightbox" role="dialog" aria-modal="true" aria-label="视频播放" hidden>
+        <div class="lightbox-bar">
+            <span class="lightbox-hint">点击播放 · 点击空白处或 Esc 关闭</span>
+            <div class="lightbox-tools">
+                <button type="button" data-action="close" aria-label="关闭">✕</button>
+            </div>
+        </div>
+        <div class="video-stage" id="video-stage">
+            <video id="lightbox-video" controls playsinline preload="metadata"></video>
         </div>
     </div>
 </body></html>
