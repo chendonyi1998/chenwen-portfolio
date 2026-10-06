@@ -445,12 +445,31 @@
             padding: 0 1rem 1.2rem;
         }
 
-        .video-stage video {
-            max-width: 100%;
+        .video-presentation {
+            position: relative;
+            width: 100%;
+            height: auto;
+            max-width: 1100px;
             max-height: 100%;
+            aspect-ratio: 16 / 9;
+            min-height: 0;
+        }
+
+        .video-presentation video, .video-presentation img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             background: #000;
             border-radius: 12px;
         }
+
+        .video-presentation [hidden] { display: none !important; }
+        #lightbox-cover { z-index: 0; }
+        #lightbox-preview { z-index: 1; }
+        #lightbox-video { z-index: 2; opacity: 0; pointer-events: none; }
+        #lightbox-video.is-ready { opacity: 1; pointer-events: auto; }
 
         .card-media-img {
             padding: 0;
@@ -1266,20 +1285,91 @@
             const box = document.getElementById('video-lightbox');
             const stage = document.getElementById('video-stage');
             const hd = document.getElementById('lightbox-video');
-            if (!box || !hd) return;
+            const fallback = document.getElementById('lightbox-preview');
+            const cover = document.getElementById('lightbox-cover');
+            if (!box || !hd || !fallback || !cover) return;
             const hdStatus = document.getElementById('video-load-status');
             const hdRetry = document.getElementById('retry-hd-video');
+            let activeTrigger = null;
+            let dialogVersion = 0;
+            let hdFramePending = false;
+            let hdNeedsGesture = false;
+
+            function showPreview(message) {
+                hd.classList.remove('is-ready');
+                fallback.hidden = false;
+                hdStatus.textContent = message;
+                if (!box.hidden && !document.hidden) {
+                    const attempt = fallback.play();
+                    if (attempt && attempt.catch) attempt.catch(function () {
+                        // 封面和原生播放控件仍保留，供限制自动播放的浏览器使用。
+                    });
+                }
+            }
+            function revealHD(version) {
+                if (version !== dialogVersion) return;
+                hdFramePending = false;
+                if (box.hidden || document.hidden || hd.paused || hd.readyState < 2) return;
+                hd.classList.add('is-ready');
+                hdNeedsGesture = false;
+                fallback.pause();
+                fallback.hidden = true;
+                hdStatus.textContent = '';
+                hdRetry.hidden = true;
+            }
+            function tryHD(version) {
+                const attempt = hd.play();
+                if (attempt && attempt.catch) attempt.catch(function (err) {
+                    if (version !== dialogVersion || box.hidden || err.name === 'AbortError') return;
+                    hdNeedsGesture = err.name === 'NotAllowedError';
+                    showPreview(err.name === 'NotAllowedError' ? '正在播放预览；点击“播放高清”切换' : '高清暂时无法播放，先播放预览');
+                    hdRetry.textContent = err.name === 'NotAllowedError' ? '播放高清' : '重试高清';
+                    hdRetry.hidden = false;
+                });
+            }
             hd.addEventListener('loadstart', function () {
-                if (!box.hidden) { hdStatus.textContent = '视频加载中…'; hdRetry.hidden = true; }
+                if (!box.hidden) {
+                    hdStatus.textContent = hdNeedsGesture ? '正在播放预览；点击“播放高清”切换' : '高清加载中，先播放预览…';
+                    hdRetry.hidden = !hdNeedsGesture;
+                }
             });
             hd.addEventListener('waiting', function () {
-                if (!box.hidden) hdStatus.textContent = '视频缓冲中…';
+                if (!box.hidden) hdStatus.textContent = hdNeedsGesture ? '正在播放预览；点击“播放高清”切换' : (hd.classList.contains('is-ready') ? '高清视频缓冲中…' : '高清加载中，先播放预览…');
             });
-            hd.addEventListener('playing', function () { hdStatus.textContent = ''; hdRetry.hidden = true; });
+            hd.addEventListener('playing', function () {
+                if (box.hidden || hdFramePending) return;
+                hdFramePending = true;
+                const version = dialogVersion;
+                // 等待高清的实际视频帧呈现后再覆盖预览，避免 canplay 后仍是黑色。
+                if (hd.requestVideoFrameCallback) hd.requestVideoFrameCallback(function () { revealHD(version); });
+                else requestAnimationFrame(function () { requestAnimationFrame(function () { revealHD(version); }); });
+            });
             hd.addEventListener('error', function () {
-                if (!box.hidden) { hdStatus.textContent = '视频暂时无法加载，请重试'; hdRetry.hidden = false; }
+                if (!box.hidden) {
+                    hdFramePending = false;
+                    showPreview('高清暂时无法加载，先播放预览');
+                    hdRetry.textContent = '重试高清';
+                    hdRetry.hidden = false;
+                }
             });
-            hdRetry.addEventListener('click', function () { openHD(hd.getAttribute('src')); });
+            fallback.addEventListener('error', function () {
+                if (!box.hidden && !hd.classList.contains('is-ready')) {
+                    fallback.hidden = true;
+                    hdStatus.textContent = '预览暂时无法播放，正在加载高清…';
+                }
+            });
+            fallback.addEventListener('loadedmetadata', function () {
+                if (!box.hidden && fallback.videoWidth && fallback.videoHeight) {
+                    fallback.parentElement.style.aspectRatio = fallback.videoWidth + ' / ' + fallback.videoHeight;
+                }
+            });
+            hdRetry.addEventListener('click', function () {
+                if (!activeTrigger) return;
+                hdFramePending = false;
+                hdNeedsGesture = false;
+                if (hd.error) { dialogVersion++; hd.load(); }
+                tryHD(dialogVersion);
+            });
             const visible = new Set();
 
             function modalOpen() {
@@ -1362,28 +1452,55 @@
                     else pause(v);
                 });
             }
-            function openHD(src) {
+            function openHD(trigger) {
                 previews.forEach(function (v) { pause(v); });
-                hdStatus.textContent = '视频加载中…';
+                activeTrigger = trigger;
+                dialogVersion++;
+                hdFramePending = false;
+                hdNeedsGesture = false;
+                hd.pause();
+                hd.classList.remove('is-ready');
+                const small = trigger.querySelector('video');
+                fallback.parentElement.style.aspectRatio = (small.videoWidth || 640) + ' / ' + (small.videoHeight || 360);
+                cover.src = small.poster;
+                cover.alt = trigger.getAttribute('aria-label').replace('点击播放高清视频：', '') + '封面';
+                fallback.hidden = false;
+                fallback.muted = true;
+                fallback.defaultMuted = true;
+                fallback.poster = small.poster;
+                fallback.src = small.currentSrc || small.dataset.src;
+                hd.poster = small.poster;
+                hd.src = trigger.dataset.hd;
+                hdStatus.textContent = '高清加载中，先播放预览…';
                 hdRetry.hidden = true;
-                hd.src = src;
                 box.hidden = false;
                 document.body.style.overflow = 'hidden';
                 try { hd.currentTime = 0; } catch (err) {}
-                play(hd);
+                showPreview('高清加载中，先播放预览…');
+                tryHD(dialogVersion);
             }
             function closeHD() {
+                dialogVersion++;
+                hdFramePending = false;
+                activeTrigger = null;
                 box.hidden = true;
                 document.body.style.overflow = '';
                 hd.pause();
+                fallback.pause();
                 hdStatus.textContent = '';
                 hdRetry.hidden = true;
+                hd.classList.remove('is-ready');
                 hd.removeAttribute('src');
                 hd.load();
+                hd.removeAttribute('poster');
+                fallback.removeAttribute('src');
+                fallback.load();
+                fallback.removeAttribute('poster');
+                cover.removeAttribute('src');
                 sync();
             }
             triggers.forEach(function (btn) {
-                btn.addEventListener('click', function () { openHD(btn.dataset.hd); });
+                btn.addEventListener('click', function () { openHD(btn); });
             });
             box.addEventListener('click', function (e) {
                 const act = e.target.closest('[data-action]');
@@ -1394,7 +1511,11 @@
                 if (!box.hidden && e.key === 'Escape') closeHD();
             });
             document.addEventListener('visibilitychange', function () {
-                if (document.hidden) hd.pause();
+                if (document.hidden) { hdFramePending = false; hd.pause(); fallback.pause(); }
+                else if (!box.hidden && !hd.classList.contains('is-ready')) {
+                    showPreview(hdStatus.textContent);
+                    if (!hd.error) tryHD(dialogVersion);
+                }
                 sync();
             });
             document.addEventListener('portfolio:modal-change', sync);
@@ -1492,7 +1613,11 @@
             </div>
         </div>
         <div class="video-stage" id="video-stage">
-            <video id="lightbox-video" controls playsinline preload="metadata"></video>
+            <div class="video-presentation">
+                <img id="lightbox-cover" alt="">
+                <video id="lightbox-preview" controls muted loop playsinline webkit-playsinline preload="none"></video>
+                <video id="lightbox-video" controls playsinline webkit-playsinline preload="metadata"></video>
+            </div>
         </div>
     </div>
 </body></html>
